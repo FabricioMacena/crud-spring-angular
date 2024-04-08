@@ -1,0 +1,27 @@
+package com.api.demo.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.api.demo.models.ProductModel;
+import com.api.demo.repositories.ProductRepository;
+
+import jakarta.validation.Valid;
+
+@Service
+public class ProductService {
+	
+	@Autowired
+	private ProductRepository repository;
+	
+	public List<ProductModel> getAllProducts(){
+		return repository.findAll();
+	}
+	
+	public ProductModel createNewProduct(@Valid @RequestBody ProductModel newProduct) {
+		return repository.save(newProduct);
+	}
+}
