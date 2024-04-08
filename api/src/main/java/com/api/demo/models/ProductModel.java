@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_products")
@@ -23,24 +25,29 @@ public class ProductModel {
 	@Column(name = "id")
 	private UUID id;
 	
+	@NotBlank
 	@Column(name = "name")
 	private String name;
 	
+	@NotNull
 	@Column(name = "amount")
 	private Integer amount;
 	
+	@NotNull
 	@Column(name = "price")
 	private Float price;
-	
+
+	@NotBlank
 	@Column(name = "category")
 	private String category;
-	
+
+	@NotBlank
 	@Column(name = "supplier")
 	private String supplier;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
-	@Column(name = "insertionDate")
+	@Column(name = "insertionDate", updatable = false)
 	private Date insertionDate;
 
 	public UUID getId() {
