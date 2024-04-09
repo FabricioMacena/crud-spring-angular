@@ -1,6 +1,7 @@
 package com.api.demo.services;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -34,5 +35,36 @@ public class ProductService {
 		productOptional.ifPresent(product -> repository.delete(product));
 		
 		return productOptional;
+	}
+	
+	public Optional<ProductModel> partialUpdateProduct(UUID id, Map<String, Object> updates){
+		Optional<ProductModel> productOptional = repository.findById(id);
+		if (productOptional.isEmpty()) {
+			return productOptional;
+		}
+		
+		ProductModel product = productOptional.get();
+		updates.forEach((key, value) -> {
+			switch (key) {
+			case "name":
+				product.setName((String) value);
+				break;
+			case "price":
+				product.setPrice((Double) value);
+				break;
+			case "amount":
+				product.setAmount((Integer) value);
+				break;
+			case "category":
+				product.setCategory((String) value);
+				break;
+			case "supplier":
+				product.setSupplier((String) value);
+				break;
+			}
+		});
+		
+		repository.save(product);
+		return repository.findById(id);
 	}
 }
