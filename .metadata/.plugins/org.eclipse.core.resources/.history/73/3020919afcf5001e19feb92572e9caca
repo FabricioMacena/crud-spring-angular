@@ -1,8 +1,0 @@
-spring.application.name=api
-
-spring.datasource.username= fabricio
-spring.datasource.password= flamengo2019
-spring.datasource.url= http://localhost/3306/eccomerce_crud
-spring.jpa.hibernate.ddl-auto=update
-
-spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
