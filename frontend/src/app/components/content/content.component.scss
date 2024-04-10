@@ -1,0 +1,42 @@
+@import "../../../color-variables.scss";
+
+header{
+  background-color: $primary-color;
+  height: 15vh;
+  padding-left: 10%;
+  display: flex;
+  align-items: center;
+
+  h1{
+    color: #fff;
+    font-size: 2.7rem;
+  }
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 85vh;
+
+  app-filters-side {
+    flex: 0 0 20%;
+    background-color: $secondary-color;
+  }
+
+  app-table-side {
+    flex: 0 0 80%;
+  }
+}
+
+@media (max-width: 900px){
+  main{
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 450px){
+  header h1{
+    font-size: 2rem;
+  }
+}
