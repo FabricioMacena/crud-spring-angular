@@ -11,5 +11,5 @@ type variantButton = 'medium' | 'small';
 })
 export class ButtonComponent {
   @Input() btnText: string = "";
-  @Input() variant: variantButton = "medium"
+  @Input() variant: variantButton = "medium";
 }
