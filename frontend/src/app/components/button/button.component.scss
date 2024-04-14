@@ -2,30 +2,18 @@
 
 .btn{
   background-color: $primary-color;
-  border-radius: 10px;
-  border: none;
   color: #fff;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
 
   &.medium{
-    font-size: 18px;
-    padding: 10px;
+    padding: 3px 5px;
+    font-size: 13px;
   }
 
-  &.small{
-    font-size: 14px;
-    padding: 5px;
-  }
-
-  &:hover{
-    background-color: $secondary-color;
-  }
-}
-
-@media (max-width: 900px){
-  .btn{
-    &.medium{
-      font-size: 14px;
-    }
+  &.medium{
+    padding: 7px 10px;
+    font-size: 16px;
   }
 }

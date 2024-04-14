@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-type variantButton = 'medium' | 'small';
+type variantBtns = "medium" | "small";
 
 @Component({
   selector: 'app-button',
@@ -10,6 +10,11 @@ type variantButton = 'medium' | 'small';
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
-  @Input() btnText: string = "";
-  @Input() variant: variantButton = "medium";
+  @Input('btn-text') btnText: string = "";
+  @Input('variant') variant: variantBtns = "medium";
+  @Output('submit') onSubmit = new EventEmitter();
+
+  submit(){
+    this.onSubmit.emit();
+  }
 }

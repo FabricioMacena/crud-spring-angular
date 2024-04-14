@@ -1,19 +1,21 @@
 <main>
   <div class="div-info">
     <h2>Produtos</h2>
-    <app-button btnText="Novo Produto" />
+    <app-button btn-text="Novo Produto" variant="medium" (submit)="showDiv()" />
   </div>
   <div class="table-container">
     <table>
-      <tr *ngFor="let product of products">
-        <td>{{ product.name }}</td>
-        <td>R$ {{ product.price }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.amount }} produtos</td>
-        <td>{{ product.supplier }}</td>
-        <td><img src="../../../assets/icon-edit.png" class="icon"></td>
-        <td><img src="../../../assets/icon-delete.png" class="icon"></td>
-      </tr>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>R$ {{ product.price }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.amount }} produtos</td>
+          <td>{{ product.supplier }}</td>
+          <td><img src="../../../assets/icon-edit.png" class="icon"></td>
+          <td><img src="../../../assets/icon-delete.png" class="icon"></td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </main>
