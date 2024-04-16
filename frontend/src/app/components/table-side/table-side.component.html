@@ -1,7 +1,9 @@
+<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()"/>
+
 <main>
   <div class="div-info">
     <h2>Produtos</h2>
-    <app-button btn-text="Novo Produto" variant="medium" (submit)="showDiv()" />
+    <app-button btn-text="Novo Produto" variant="medium" (submit)="toggleScreenVisible()" />
   </div>
   <div class="table-container">
     <table>

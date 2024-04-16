@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { ProductInterface } from '../../interfaces/product-interface';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { ScreenModalComponent } from '../screen-modal/screen-modal.component';
 
 @Component({
   selector: 'app-table-side',
   standalone: true,
-  imports: [NgFor, ButtonComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    ButtonComponent,
+    ScreenModalComponent
+  ],
   providers: [ProductsService],
   templateUrl: './table-side.component.html',
   styleUrl: './table-side.component.scss'
 })
 export class TableSideComponent implements OnInit{
 
-  isDivActive: boolean = false;
+  isScreenActive: boolean = false;
 
   products?: ProductInterface[];
 
@@ -29,8 +35,7 @@ export class TableSideComponent implements OnInit{
     }
   }
 
-  showDiv(): void{
-    this.isDivActive = !this.isDivActive;
-    console.log("Div Active = " + this.isDivActive);
+  toggleScreenVisible(): void{
+    this.isScreenActive = !this.isScreenActive;
   }
 }

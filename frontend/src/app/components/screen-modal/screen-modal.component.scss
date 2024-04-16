@@ -1,0 +1,85 @@
+@import "../../../color-variables.scss";
+
+.screen-container{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+  width: 30%;
+  height: 60%;
+  border-radius: 10px;
+
+  form{
+    width: 100%;
+    height: 100%;
+
+    .inputs{
+      height: 85%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      input, select{
+        border: none;
+        outline: none;
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      input{
+        border-bottom: solid 1px $primary-color;
+        padding: 10px 0;
+
+        &:first-child{
+          background-color: $primary-color;
+          width: 100%;
+          color: #fff;
+          font-size: 28px;
+          text-align: center;
+          border: none;
+          padding: 20px 0;
+          border-radius: 10px 10px 0 0;
+        }
+      }
+
+      select{
+        border-radius: 15px;
+        background-color: $quaternary-color;
+        color: #29522acf;
+        padding: 15px 20px;
+      }
+    }
+
+    .btns{
+      height: 15%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media (max-width: 1000px){
+  .screen-container{
+    width: 65%;
+    height: 70%;
+  }
+}
+
+@media (max-width: 600px){
+  .screen-container{
+    width: 90%;
+    height: 90%;
+  }
+
+  input, select{
+    font-size: 20px;
+  }
+}
