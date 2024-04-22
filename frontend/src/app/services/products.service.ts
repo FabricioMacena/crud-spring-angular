@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductInterface } from '../interfaces/product-interface';
 import { UUID } from 'node:crypto';
+import { ProductInterface } from '../interfaces/product-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,10 @@ export class ProductsService {
 
   addProduct(product: ProductInterface): Observable<ProductInterface>{
     return this.http.post<ProductInterface>(`${this.url}/products/`, product);
+  }
+
+  updateProduct(id: UUID, product: ProductInterface): Observable<ProductInterface>{
+    return this.http.patch<ProductInterface>(`${this.url}/product/${id}`, product);
   }
 
   deleteProduct(id: UUID): Observable<UUID>{

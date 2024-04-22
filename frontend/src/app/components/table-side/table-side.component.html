@@ -1,4 +1,4 @@
-<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()"/>
+<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()" [isEditMode]="isEditMode" [selectedProduct]="selectedProduct"/>
 
 <main>
   <div class="div-info">
@@ -14,7 +14,7 @@
           <td>{{ product.category }}</td>
           <td>{{ product.amount }} produtos</td>
           <td>{{ product.supplier }}</td>
-          <td><img src="../../../assets/icon-edit.png" class="icon"></td>
+          <td><img src="../../../assets/icon-edit.png" class="icon" (click)="editProduct(product)"></td>
           <td><img src="../../../assets/icon-delete.png" class="icon"></td>
         </tr>
       </tbody>

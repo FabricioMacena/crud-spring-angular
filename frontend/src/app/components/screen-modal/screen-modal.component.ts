@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { ProductsService } from '../../services/products.service';
-import { ProductInterface } from '../../interfaces/product-interface';
 import { FormsModule } from '@angular/forms';
+import { ProductInterface } from '../../interfaces/product-interfaces';
 
 @Component({
   selector: 'app-screen-modal',
@@ -11,29 +11,46 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './screen-modal.component.html',
   styleUrl: './screen-modal.component.scss'
 })
-export class ScreenModalComponent {
+export class ScreenModalComponent implements OnInit {
   @Output("cancel") cancel = new EventEmitter();
+  @Input("isEditMode") isEditMode?: boolean;
+  @Input("selectedProduct") selectedProduct?: ProductInterface | null;
 
-  formData: ProductInterface = {
-    name: '',
-    amount: NaN,
-    price: NaN,
-    category: '',
-    supplier: ''
-  };
+  formData!: ProductInterface;
+
+  ngOnInit(): void {
+
+    console.log(this.selectedProduct);
+
+      if (this.selectedProduct && this.isEditMode){
+        this.formData = { ...this.selectedProduct}
+      } else {
+        this.formData = {
+          id: '`${string}-${string}-${string}-${string}-${string}`',
+          name: '',
+          amount: NaN,
+          price: NaN,
+          category: '',
+          supplier: ''
+        }
+      }
+  }
 
   constructor(private prodService: ProductsService){ }
 
   onSubmit(): void {
-    this.prodService.addProduct(this.formData).subscribe(
-      (response: ProductInterface) => {
-        console.log("Novo produto adicionado: ", response);
-        this.cancel.emit();
-        window.location.reload();
+    if (this.isEditMode && this.selectedProduct){
+      // this.prodService.updateProduct()
+    } else {
+      this.prodService.addProduct(this.formData).subscribe(
+        (response: ProductInterface) => {
+          this.cancel.emit();
+          window.location.reload();
+        }
+      ),
+      (error: string) => {
+        console.log("Erro ao adicionar o novo produto.", error)
       }
-    ),
-    (error: string) => {
-      console.log("Erro ao adicionar o novo produto.", error)
     }
   }
 
