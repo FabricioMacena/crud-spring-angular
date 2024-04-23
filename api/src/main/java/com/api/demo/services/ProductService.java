@@ -37,32 +37,20 @@ public class ProductService {
 		return productOptional;
 	}
 	
-	public Optional<ProductModel> partialUpdateProduct(UUID id, Map<String, Object> updates){
+	public Optional<ProductModel> updateProduct(UUID id, ProductModel newProduct){
 		Optional<ProductModel> productOptional = repository.findById(id);
 		if (productOptional.isEmpty()) {
 			return productOptional;
 		}
 		
 		ProductModel product = productOptional.get();
-		updates.forEach((key, value) -> {
-			switch (key) {
-			case "name":
-				product.setName((String) value);
-				break;
-			case "price":
-				product.setPrice((Double) value);
-				break;
-			case "amount":
-				product.setAmount((Integer) value);
-				break;
-			case "category":
-				product.setCategory((String) value);
-				break;
-			case "supplier":
-				product.setSupplier((String) value);
-				break;
-			}
-		});
+		
+		product.setName(newProduct.getName());
+		product.setCategory(newProduct.getCategory());
+		product.setAmount(newProduct.getAmount());
+		product.setPrice(newProduct.getPrice());
+		product.setSupplier(newProduct.getSupplier());
+		
 		
 		repository.save(product);
 		return repository.findById(id);
