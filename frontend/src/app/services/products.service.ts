@@ -14,7 +14,7 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<ProductInterface[]>{
-    return this.http.get<ProductInterface[]>(`${this.url}/products/`)
+    return this.http.get<ProductInterface[]>(`${this.url}/products/`);
   }
 
   addProduct(product: ProductInterface): Observable<ProductInterface>{
@@ -26,7 +26,7 @@ export class ProductsService {
     return this.http.put<ProductInterface>(`${this.url}/products/${id}`, product);
   }
 
-  deleteProduct(id: UUID): Observable<UUID>{
-    return this.http.delete<UUID>(`${this.url}/products/${id}`);
+  deleteProduct(id: UUID): Observable<void>{
+    return this.http.delete<void>(`${this.url}/products/${id}`);
   }
 }

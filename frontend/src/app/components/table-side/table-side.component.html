@@ -1,9 +1,10 @@
-<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()" [isEditMode]="isEditMode" [selectedProduct]="selectedProduct"/>
+<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()" [isEditMode]="isEditMode" [selectedProduct]="selectedProduct!" />
+<app-screen-modal-del *ngIf="isDelScreenActive" [selectedProduct]="selectedProduct!" (cancel)="toggleDelScreenVisible()"/>
 
 <main>
   <div class="div-info">
     <h2>Produtos</h2>
-    <app-button btn-text="Novo Produto" variant="medium" (submit)="toggleScreenVisible()" />
+    <app-button btn-text="Novo Produto" variant="medium" (click)="toggleScreenVisible()" />
   </div>
   <div class="table-container">
     <table>
@@ -15,7 +16,7 @@
           <td>{{ product.amount }} produtos</td>
           <td>{{ product.supplier }}</td>
           <td><img src="../../../assets/icon-edit.png" class="icon" (click)="editProduct(product)"></td>
-          <td><img src="../../../assets/icon-delete.png" class="icon"></td>
+          <td><img src="../../../assets/icon-delete.png" class="icon" (click)="deleteProduct(product)"></td>
         </tr>
       </tbody>
     </table>

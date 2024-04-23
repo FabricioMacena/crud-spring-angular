@@ -12,9 +12,4 @@ type variantBtns = "medium" | "small";
 export class ButtonComponent {
   @Input('btn-text') btnText: string = "";
   @Input('variant') variant: variantBtns = "medium";
-  @Output('submit') onSubmit = new EventEmitter();
-
-  submit(){
-    this.onSubmit.emit();
-  }
 }

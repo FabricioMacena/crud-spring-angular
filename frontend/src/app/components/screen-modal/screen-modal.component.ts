@@ -14,7 +14,9 @@ import { ProductInterface } from '../../interfaces/product-interfaces';
 export class ScreenModalComponent implements OnInit {
   @Output("cancel") cancel = new EventEmitter();
   @Input("isEditMode") isEditMode?: boolean;
-  @Input("selectedProduct") selectedProduct?: ProductInterface | null;
+  @Input("selectedProduct") selectedProduct!: ProductInterface;
+
+  constructor(private prodService: ProductsService){ }
 
   formData!: ProductInterface;
 
@@ -36,28 +38,23 @@ export class ScreenModalComponent implements OnInit {
     }
   }
 
-  constructor(private prodService: ProductsService){ }
-
   onSubmit(): void {
-
-    console.log(this.formData);
-
     if (this.isEditMode && this.selectedProduct){
       this.prodService.updateProduct(this.selectedProduct.id, this.formData).subscribe(
-        (response: ProductInterface) => {
+        () => {
           this.cancel.emit();
           window.location.reload();
         }
       )
     } else {
       this.prodService.addProduct(this.formData).subscribe(
-        (response: ProductInterface) => {
+        () => {
           this.cancel.emit();
           window.location.reload();
         }
       ),
       (error: string) => {
-        console.log("Erro ao adicionar o novo produto.", error)
+        console.log("Erro ao adicionar o novo produto.", error);
       }
     }
   }

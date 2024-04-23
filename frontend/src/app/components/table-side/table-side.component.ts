@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { ScreenModalComponent } from '../screen-modal/screen-modal.component';
 import { ProductInterface } from '../../interfaces/product-interfaces';
+import { ScreenModalDelComponent } from '../screen-modal-del/screen-modal-del.component';
 
 @Component({
   selector: 'app-table-side',
@@ -12,29 +12,21 @@ import { ProductInterface } from '../../interfaces/product-interfaces';
     NgFor,
     NgIf,
     ButtonComponent,
-    ScreenModalComponent
+    ScreenModalComponent,
+    ScreenModalDelComponent
   ],
-  providers: [ProductsService],
   templateUrl: './table-side.component.html',
   styleUrl: './table-side.component.scss'
 })
 export class TableSideComponent implements OnInit{
+  @Input("products") products!: ProductInterface[];
 
   isScreenActive: boolean = false;
-  selectedProduct: ProductInterface | null = null;
+  isDelScreenActive: boolean = false;
+  selectedProduct?: ProductInterface;
   isEditMode: boolean = false;
 
-  products?: ProductInterface[];
-
-  constructor(private prodService: ProductsService) { }
-
-  ngOnInit(): void {
-    this.prodService.getAllProducts().subscribe(
-      (response) => this.products = response
-    ),
-    (error: string) => {
-      console.log("ocorreu um erro na requisição getAll." + error);
-    }
+  ngOnInit(){
   }
 
   editProduct(product: ProductInterface): void {
@@ -43,10 +35,18 @@ export class TableSideComponent implements OnInit{
     this.toggleScreenVisible();
   }
 
+  deleteProduct(product: ProductInterface): void {
+    this.selectedProduct = { ...product };
+    this.toggleDelScreenVisible();
+  }
+
   addProduct(): void {
     this.isEditMode = false;
-    this.selectedProduct = null;
     this.toggleScreenVisible();
+  }
+
+  toggleDelScreenVisible(): void {
+    this.isDelScreenActive = !this.isDelScreenActive
   }
 
   toggleScreenVisible(): void{
