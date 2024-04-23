@@ -63,11 +63,10 @@ public class ProductController {
 		Optional<ProductModel> productOptional = service.deleteProduct(id);
 		
 		if (productOptional.isEmpty()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O produto não foi encontrado");
+			return ResponseEntity.notFound().build();
 		}
 		
-		ProductModel productDeleted = productOptional.get();
-		return ResponseEntity.status(HttpStatus.OK).body(productDeleted.getName() + " foi removido com sucesso!!");
+		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping("/{id}")
