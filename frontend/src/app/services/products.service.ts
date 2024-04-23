@@ -18,11 +18,12 @@ export class ProductsService {
   }
 
   addProduct(product: ProductInterface): Observable<ProductInterface>{
-    return this.http.post<ProductInterface>(`${this.url}/products/`, product);
+    const {id, ...newProduct} = product;
+    return this.http.post<ProductInterface>(`${this.url}/products/`, newProduct);
   }
 
   updateProduct(id: UUID, product: ProductInterface): Observable<ProductInterface>{
-    return this.http.patch<ProductInterface>(`${this.url}/product/${id}`, product);
+    return this.http.put<ProductInterface>(`${this.url}/products/${id}`, product);
   }
 
   deleteProduct(id: UUID): Observable<UUID>{

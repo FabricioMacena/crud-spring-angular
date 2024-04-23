@@ -22,25 +22,33 @@ export class ScreenModalComponent implements OnInit {
 
     console.log(this.selectedProduct);
 
-      if (this.selectedProduct && this.isEditMode){
-        this.formData = { ...this.selectedProduct}
-      } else {
-        this.formData = {
-          id: '`${string}-${string}-${string}-${string}-${string}`',
-          name: '',
-          amount: NaN,
-          price: NaN,
-          category: '',
-          supplier: ''
-        }
+    if (this.selectedProduct && this.isEditMode){
+      this.formData = { ...this.selectedProduct}
+    } else {
+      this.formData = {
+        id: '`${string}-${string}-${string}-${string}-${string}`',
+        name: '',
+        amount: NaN,
+        price: NaN,
+        category: '',
+        supplier: ''
       }
+    }
   }
 
   constructor(private prodService: ProductsService){ }
 
   onSubmit(): void {
+
+    console.log(this.formData);
+
     if (this.isEditMode && this.selectedProduct){
-      // this.prodService.updateProduct()
+      this.prodService.updateProduct(this.selectedProduct.id, this.formData).subscribe(
+        (response: ProductInterface) => {
+          this.cancel.emit();
+          window.location.reload();
+        }
+      )
     } else {
       this.prodService.addProduct(this.formData).subscribe(
         (response: ProductInterface) => {
