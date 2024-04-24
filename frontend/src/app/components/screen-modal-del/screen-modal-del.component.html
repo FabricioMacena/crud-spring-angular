@@ -1,7 +1,9 @@
 <div class="del-screen-container">
   <form (ngSubmit)="onSubmit()">
-    <h3>Deseja Excluir o produto {{ selectedProduct.name }}</h3>
-    <div>
+    <div class="div-sup">
+      <p>Deseja Excluir o produto {{ selectedProduct.name }}?</p>
+    </div>
+    <div class="div-btns">
       <app-button btn-text="Cancelar" variant="small" (click)="clickCancel()"/>
       <app-button btn-text="Excluir" variant="small" type="submit" />
     </div>
