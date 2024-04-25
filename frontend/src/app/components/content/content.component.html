@@ -3,6 +3,7 @@
 </header>
 
 <main>
-  <app-filters-side />
-  <app-table-side [products]="products"/>
+  <app-filters-side [categories]="categories" (categoriesSelected)="receiveSelectedCategories($event)"></app-filters-side>
+  <app-table-side [products]="products" [categories]="categories" [selectedCategories]="selectedCategories"></app-table-side>
 </main>
+

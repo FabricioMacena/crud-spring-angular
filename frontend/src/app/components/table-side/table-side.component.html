@@ -1,4 +1,4 @@
-<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()" [isEditMode]="isEditMode" [selectedProduct]="selectedProduct!" />
+<app-screen-modal *ngIf="isScreenActive" (cancel)="toggleScreenVisible()" [isEditMode]="isEditMode" [selectedProduct]="selectedProduct!" [categories]="categories"/>
 <app-screen-modal-del *ngIf="isDelScreenActive" [selectedProduct]="selectedProduct!" (cancel)="toggleDelScreenVisible()"/>
 
 <main>
@@ -9,7 +9,7 @@
   <div class="table-container">
     <table>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of filteredProducts">
           <td>{{ product.name }}</td>
           <td>R$ {{ product.price }}</td>
           <td>{{ product.category }}</td>

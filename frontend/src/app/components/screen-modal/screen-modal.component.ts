@@ -3,11 +3,12 @@ import { ButtonComponent } from '../button/button.component';
 import { ProductsService } from '../../services/products.service';
 import { FormsModule } from '@angular/forms';
 import { ProductInterface } from '../../interfaces/product-interfaces';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-screen-modal',
   standalone: true,
-  imports: [ButtonComponent, FormsModule],
+  imports: [ButtonComponent, FormsModule, NgFor],
   templateUrl: './screen-modal.component.html',
   styleUrl: './screen-modal.component.scss'
 })
@@ -15,15 +16,13 @@ export class ScreenModalComponent implements OnInit {
   @Output("cancel") cancel = new EventEmitter();
   @Input("isEditMode") isEditMode?: boolean;
   @Input("selectedProduct") selectedProduct!: ProductInterface;
+  @Input("categories") categories!: string[];
 
   constructor(private prodService: ProductsService){ }
 
   formData!: ProductInterface;
 
   ngOnInit(): void {
-
-    console.log(this.selectedProduct);
-
     if (this.selectedProduct && this.isEditMode){
       this.formData = { ...this.selectedProduct}
     } else {

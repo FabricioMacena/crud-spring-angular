@@ -29,4 +29,8 @@ export class ProductsService {
   deleteProduct(id: UUID): Observable<void>{
     return this.http.delete<void>(`${this.url}/products/${id}`);
   }
+
+  getCategories(): Observable<string[]>{
+    return this.http.get<string[]>(`${this.url}/products/categories`);
+  }
 }

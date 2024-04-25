@@ -16,6 +16,8 @@ import { ProductInterface } from '../../interfaces/product-interfaces';
 })
 export class ContentComponent implements OnInit {
   products!: ProductInterface[];
+  categories: string[] = [];
+  selectedCategories: string[] = [];
 
   constructor(private prodService: ProductsService){}
 
@@ -23,6 +25,12 @@ export class ContentComponent implements OnInit {
     this.prodService.getAllProducts().subscribe(
       response => this.products = response
     )
+    this.prodService.getCategories().subscribe(
+      response => this.categories = response
+    )
   }
 
+  receiveSelectedCategories(categories: string[]): void {
+    this.selectedCategories = categories;
+  }
 }

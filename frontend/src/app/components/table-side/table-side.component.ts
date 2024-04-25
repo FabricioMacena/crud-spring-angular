@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { ScreenModalComponent } from '../screen-modal/screen-modal.component';
@@ -20,13 +20,35 @@ import { ScreenModalDelComponent } from '../screen-modal-del/screen-modal-del.co
 })
 export class TableSideComponent implements OnInit{
   @Input("products") products!: ProductInterface[];
+  @Input("selectedCategories") selectedCategories!: string[];
+  @Input("categories") categories!: string[];
 
   isScreenActive: boolean = false;
   isDelScreenActive: boolean = false;
   selectedProduct?: ProductInterface;
   isEditMode: boolean = false;
 
-  ngOnInit(){
+  filteredProducts: ProductInterface[] = [];
+
+  ngOnInit() {
+    this.filterProducts();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedCategories']) {
+      this.filterProducts();
+      console.log(this.selectedCategories);
+    }
+  }
+
+  filterProducts(): void {
+    if (!this.selectedCategories || this.selectedCategories.length === 0) {
+      this.filteredProducts = this.products;
+    } else {
+      this.filteredProducts = this.products.filter(product =>
+        this.selectedCategories.includes(product.category)
+      );
+    }
   }
 
   editProduct(product: ProductInterface): void {

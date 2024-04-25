@@ -1,3 +1,6 @@
 <aside>
-
+  <h3>Filtros por categoria</h3>
+  <div class="categories">
+    <app-button-filter [label]="category" (toggle)="toggleCategory(category)"  *ngFor="let category of categories"/>
+  </div>
 </aside>
