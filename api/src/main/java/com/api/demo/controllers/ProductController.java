@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.demo.models.ProductModel;
@@ -79,5 +78,10 @@ public class ProductController {
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(productOptional.get());
+	}
+	
+	@GetMapping("/categories")
+	public ResponseEntity<List<String>> getCategories(){
+		return ResponseEntity.status(HttpStatus.OK).body(service.categoriesOfProducts());
 	}
 }

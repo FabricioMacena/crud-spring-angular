@@ -1,7 +1,6 @@
 package com.api.demo.services;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -54,5 +53,9 @@ public class ProductService {
 		
 		repository.save(product);
 		return repository.findById(id);
+	}
+	
+	public List<String> categoriesOfProducts(){
+		return repository.findDisctinctCategories();
 	}
 }
