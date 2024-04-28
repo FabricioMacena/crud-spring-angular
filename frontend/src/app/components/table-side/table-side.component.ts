@@ -37,7 +37,6 @@ export class TableSideComponent implements OnInit{
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedCategories']) {
       this.filterProducts();
-      console.log(this.selectedCategories);
     }
   }
 

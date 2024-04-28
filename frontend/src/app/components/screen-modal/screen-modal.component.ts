@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { ProductsService } from '../../services/products.service';
 import { FormsModule } from '@angular/forms';
@@ -20,20 +20,21 @@ export class ScreenModalComponent implements OnInit {
 
   constructor(private prodService: ProductsService){ }
 
-  formData!: ProductInterface;
+  emptyData: ProductInterface = {
+    id: '`${string}-${string}-${string}-${string}-${string}`',
+    name: '',
+    amount: NaN,
+    price: NaN,
+    category: '',
+    supplier: ''
+  };
+  formData: ProductInterface = { ...this.emptyData };
 
   ngOnInit(): void {
     if (this.selectedProduct && this.isEditMode){
-      this.formData = { ...this.selectedProduct}
+      this.formData = { ...this.selectedProduct};
     } else {
-      this.formData = {
-        id: '`${string}-${string}-${string}-${string}-${string}`',
-        name: '',
-        amount: NaN,
-        price: NaN,
-        category: '',
-        supplier: ''
-      }
+      this.formData = { ...this.emptyData};
     }
   }
 
@@ -41,15 +42,13 @@ export class ScreenModalComponent implements OnInit {
     if (this.isEditMode && this.selectedProduct){
       this.prodService.updateProduct(this.selectedProduct.id, this.formData).subscribe(
         () => {
-          this.cancel.emit();
-          window.location.reload();
+          this.clickCancel();
         }
       )
     } else {
       this.prodService.addProduct(this.formData).subscribe(
         () => {
-          this.cancel.emit();
-          window.location.reload();
+          this.clickCancel();
         }
       ),
       (error: string) => {
@@ -59,6 +58,8 @@ export class ScreenModalComponent implements OnInit {
   }
 
   clickCancel(): void {
+    if (this.isEditMode){ this.isEditMode = !this.isEditMode; }
     this.cancel.emit();
+    window.location.reload();
   }
 }

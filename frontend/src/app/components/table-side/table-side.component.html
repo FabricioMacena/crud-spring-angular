@@ -7,18 +7,16 @@
     <app-button btn-text="Novo Produto" variant="medium" (click)="toggleScreenVisible()" />
   </div>
   <div class="table-container">
-    <table>
-      <tbody>
-        <tr *ngFor="let product of filteredProducts">
-          <td>{{ product.name }}</td>
-          <td>R$ {{ product.price }}</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.amount }} produtos</td>
-          <td>{{ product.supplier }}</td>
-          <td><img src="../../../assets/icon-edit.png" class="icon" (click)="editProduct(product)"></td>
-          <td><img src="../../../assets/icon-delete.png" class="icon" (click)="deleteProduct(product)"></td>
-        </tr>
-      </tbody>
-    </table>
+    <article>
+      <div class="row-table" *ngFor="let product of filteredProducts">
+        <div class="value-table">{{ product.name }}</div>
+        <div class="value-table">R$ {{ product.price }}</div>
+        <div class="value-table category" [class]="product.category">{{ product.category }}</div>
+        <div class="value-table">{{ product.amount }} produtos</div>
+        <div class="value-table">{{ product.supplier }}</div>
+        <div class="value-table"><img src="../../../assets/icon-edit.png" class="icon" (click)="editProduct(product)"></div>
+        <div class="value-table"><img src="../../../assets/icon-delete.png" class="icon" (click)="deleteProduct(product)"></div>
+      </div>
+    </article>
   </div>
 </main>
